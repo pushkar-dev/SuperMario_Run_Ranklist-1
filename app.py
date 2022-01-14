@@ -19,7 +19,7 @@ def helper(r, i):
         for j in range(len(json_data["result"])):
             try:
                 if (json_data["result"][j]["verdict"] == "OK" and 
-                    json_data["result"][j]["problem"]["rating"] >= data['ratings'][i]):
+                    json_data["result"][j]["problem"]["rating"] >= max (data['ratings'][i], 1000)):
                     count += 1
             except:
                 pass
