@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranklist</title>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+        a, a:hover, a:focus, a:active {
+      text-decoration: none;
+      color: inherit;
+ }
+        </style>
+</head>
+<body>
+    <h1> Contest-Name RANKLIST </h1>
+    <h3> Updates in Every 2 Hours </h3> 
+    <table style="width:100%">
+        <tr>
+            <th>S No.</th>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Codeforces Handle</th>
+            <th>Rating</th>
+            <th> Questions Solved </th>
+        </tr>
+        {% for i in lists %}
+            <tr>
+                <td>{{ i.s_no }}</td>
+                <td>{{ i.name }}</td>
+                <td>{{ i.roll_no }}</td>
+                <td> <a href = "https://codeforces.com/profile/{{ i.codeforces_handle }}">{{ i.codeforces_handle }}<a></td>
+                <td>{{ i.rating }}</td>
+                <td>{{ i.questions_solved }}</td>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
