@@ -58,7 +58,7 @@ def home():
 
 if __name__ == '__main__':
     # Scheduler #2
-    scheduler.add_job(id = 'Scheduled Task', func = update_sheet, trigger="interval", hours = 2)
+    scheduler.add_job(id = 'Scheduled Task', func = update_sheet, trigger="interval", hours = 1)
     scheduler.start()
     # running the app
     app.run(debug = True)
