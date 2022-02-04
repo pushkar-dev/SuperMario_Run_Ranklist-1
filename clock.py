@@ -4,7 +4,7 @@ import requests as re
 from db_access import *
 
 scheduler = BlockingScheduler()
-TIME_STAMP=1643932800 #unix time stamp for 4th feb 2022
+TIME_STAMP = 1643913000 #unix time stamp for 4th feb 2022
 proxy = {
 'http' : '',
 'https' : ''
