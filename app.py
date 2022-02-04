@@ -1,16 +1,9 @@
-import atexit
-from flask_apscheduler import APScheduler
 from flask import Flask, render_template
-import pandas
-import requests as re
+from pandas import read_csv
 
-proxy = {
-'http' : '',
-'https' : ''
-}
-# reading the existing data
-data = pandas.read_csv("handles")
+MAINTAINANCE=False
 
+<<<<<<< HEAD
 # counting the number of Questions for a particular user
 def helper(r, i):
     count = 0
@@ -26,22 +19,13 @@ def helper(r, i):
     except:
         pass
     return count
+=======
+>>>>>>> 3c7f0ad394a5d923eb777e5e91a7c33117f96a83
 # making flask app
 app = Flask(__name__)
 
-#schedule #1
-scheduler = APScheduler()
-def update_sheet():
-    for i in range(len(data["Name"])):
-        url = "https://codeforces.com/api/user.status?handle="+data["Codeforces Handle"][i]+"&from=1&count=100000"
-        r = re.get(url, proxies=proxy)
-        data['Questions_Solved'][i] = helper(r, i)
-        d = data.sort_values('Questions_Solved', ascending= False)
-        d.to_csv('handles', index = False)
-        print(i)
-
-@app.route('/')
-def home():
+def load_users():
+    data=read_csv('handles')
     user_details = []
     for i in range(len(data["Codeforces Handle"])):
         user = {}
@@ -52,13 +36,27 @@ def home():
         user["questions_solved"] = data["Questions_Solved"][i]
         user["rating"] = data["ratings"][i]
         user_details.append(user)
+    return user_details
 
-    #passing the data to frontend
+@app.route('/')
+def home():
+    if MAINTAINANCE:
+        return render_template('maintainance.html')
+    user_details=load_users()
+    return render_template('index.html', lists = user_details)
+
+@app.route('/dev')
+def dev():
+    user_details=load_users()
     return render_template('index.html', lists = user_details)
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     # Scheduler #2
     scheduler.add_job(id = 'Scheduled Task', func = update_sheet, trigger="interval", seconds = 300)
     scheduler.start()
     # running the app
     app.run(debug = True)
+=======
+    app.run(debug = False)
+>>>>>>> 3c7f0ad394a5d923eb777e5e91a7c33117f96a83
