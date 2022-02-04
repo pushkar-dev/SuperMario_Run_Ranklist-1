@@ -14,7 +14,7 @@ class Database:
         return list(self.cursor.fetchall())
 
     def update(self, count, handle):
-        self.cursor.execute(f"Update data set Questions_Solved = {count} where Handle = {handle}")
+        self.cursor.execute(f"Update data set \"Questions_Solved\" = {count} where \"Handle\" = '{handle}'")
         self.connection.commit()
 
     def show(self, handle):

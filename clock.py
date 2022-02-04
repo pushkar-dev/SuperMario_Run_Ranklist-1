@@ -38,6 +38,7 @@ def update_sheet():
         url = "https://codeforces.com/api/user.status?handle="+data["Codeforces Handle"][i]+"&from=1&count=100000"
         r = re.get(url, proxies=proxy)
         db.update(helper(r, i), data["Codeforces Handle"][i])
+        print (db.show(data["Codeforces Handle"][i]))
         # data['Questions_Solved'][i] = helper(r, i)
         # d = data.sort_values('Questions_Solved', ascending= False)
         # d.to_csv('handles', index = False)
