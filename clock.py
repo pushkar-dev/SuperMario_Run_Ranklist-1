@@ -30,7 +30,7 @@ def helper(r, i, handle):
         except:
             pass
     except:
-        count = db.show(handle)
+        count = list(db.show(handle))[0][5]
     return count
 
 #schedule 1
