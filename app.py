@@ -12,21 +12,20 @@ app = Flask(__name__)
 def load_users():
     data=read_csv('handles')
     user_details = []
-    for i in range(len(data["Codeforces Handle"])):
+    details = db.show_data()
+    for j in range(len(data["Codeforces Handle"])):
         user = {}
-        user["s_no"] = i + 1
+        user["s_no"] = j + 1
         # user["name"] = data["Name"][i]
         # user["roll_no"] = data["Roll No."][i]
         # user["codeforces_handle"] = data["Codeforces Handle"][i]
         # user["questions_solved"] = data["Questions_Solved"][i]
         # user["rating"] = data["ratings"][i]
-        handle = data["Codeforces Handle"][i]
-        details = list(db.show(handle))[0]
-        user["name"] = details[0]
-        user["roll_no"] = details[1]
-        user["codeforces_handle"] = details[3]
-        user["questions_solved"] = details[4]
-        user["rating"] = details[5]
+        user["name"] = details[j][0]
+        user["roll_no"] = details[j][1]
+        user["codeforces_handle"] = details[j][3]
+        user["questions_solved"] = details[j][4]
+        user["rating"] = details[j][5]
         user_details.append(user)
     return user_details
 

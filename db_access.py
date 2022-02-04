@@ -20,6 +20,10 @@ class Database:
     def show(self, handle):
         entries = self.execute(f"SELECT * from data where \"Handle\" = '{handle}';") 
         return entries
+    
+    def show_data(self):
+        entries = self.execute(f"SELECT * from data order by \"Questions_Solved\" DESC;") 
+        return entries
 
 
     def __del__(self):
