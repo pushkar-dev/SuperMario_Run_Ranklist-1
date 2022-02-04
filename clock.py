@@ -13,7 +13,7 @@ data = pandas.read_csv("handles")
 
 # counting the number of Questions for a particular user
 def helper(r, i):
-    count = 0
+    count = 1
     json_data = r. json()
     try:
         for j in range(len(json_data["result"])):
@@ -31,7 +31,7 @@ def helper(r, i):
     return count
 
 #schedule 1
-@scheduler.scheduled_job('interval',minutes=60)
+@scheduler.scheduled_job('interval',minutes=1)
 def update_sheet():
     print ("hello")
     for i in range(len(data["Name"])):
