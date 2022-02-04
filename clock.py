@@ -1,6 +1,7 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 import pandas
 import requests as re
+from db_access import *
 
 scheduler = BlockingScheduler()
 TIME_STAMP=1643932800 #unix time stamp for 4th feb 2022
@@ -13,11 +14,10 @@ data = pandas.read_csv("handles")
 
 # counting the number of Questions for a particular user
 def helper(r, i):
-    count = 1
+    count = 10
     json_data = r. json()
     try:
         for j in range(len(json_data["result"])):
-            print(j)
             try:
                 if (json_data["result"][j]["verdict"] == "OK" and 
                     json_data["result"][j]["problem"]["rating"] >= max (data['ratings'][i], 1200) and
@@ -37,9 +37,10 @@ def update_sheet():
     for i in range(len(data["Name"])):
         url = "https://codeforces.com/api/user.status?handle="+data["Codeforces Handle"][i]+"&from=1&count=100000"
         r = re.get(url, proxies=proxy)
-        data['Questions_Solved'][i] = helper(r, i)
-        d = data.sort_values('Questions_Solved', ascending= False)
-        d.to_csv('handles', index = False)
+        db.update(helper(r, i), data["Codeforces Handle"][i])
+        # data['Questions_Solved'][i] = helper(r, i)
+        # d = data.sort_values('Questions_Solved', ascending= False)
+        # d.to_csv('handles', index = False)
         print(i)
 
 scheduler.start()
