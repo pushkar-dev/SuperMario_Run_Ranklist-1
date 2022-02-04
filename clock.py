@@ -17,9 +17,10 @@ def helper(r, i):
     json_data = r. json()
     try:
         for j in range(len(json_data["result"])):
+            print(j)
             try:
                 if (json_data["result"][j]["verdict"] == "OK" and 
-                    json_data["result"][j]["problem"]["rating"] >= max (data['ratings'][i], 1000) and
+                    json_data["result"][j]["problem"]["rating"] >= max (data['ratings'][i], 1200) and
                     json_data["result"][j]["problem"]["startTimeSeconds"]>=TIME_STAMP and
                     json_data["result"][j]["author"]["ghost"]==False):
                     count += 1
@@ -30,8 +31,9 @@ def helper(r, i):
     return count
 
 #schedule 1
-@scheduler.scheduled_job('interval',minutes=1)
+@scheduler.scheduled_job('interval',minutes=60)
 def update_sheet():
+    print ("hello")
     for i in range(len(data["Name"])):
         url = "https://codeforces.com/api/user.status?handle="+data["Codeforces Handle"][i]+"&from=1&count=100000"
         r = re.get(url, proxies=proxy)
