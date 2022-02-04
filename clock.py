@@ -30,7 +30,7 @@ def helper(r, i):
     return count
 
 #schedule 1
-@scheduler.scheduled_job('interval',minutes='60')
+@scheduler.scheduled_job('interval',hours=1)
 def update_sheet():
     for i in range(len(data["Name"])):
         url = "https://codeforces.com/api/user.status?handle="+data["Codeforces Handle"][i]+"&from=1&count=100000"
