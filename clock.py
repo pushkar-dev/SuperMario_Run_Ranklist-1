@@ -13,7 +13,7 @@ proxy = {
 data = pandas.read_csv("handles")
 
 # counting the number of Questions for a particular user
-def helper(r, i):
+def helper(r, i, handle):
     try:
         count = 0
         json_data = r. json()
@@ -30,7 +30,7 @@ def helper(r, i):
         except:
             pass
     except:
-        count = 0 
+        count = db.show(handle)
     return count
 
 #schedule 1
@@ -40,7 +40,7 @@ def update_sheet():
     for i in range(len(data["Name"])):
         url = "https://codeforces.com/api/user.status?handle="+data["Codeforces Handle"][i]+"&from=1&count=100000"
         r = re.get(url, proxies=proxy)
-        db.update(helper(r, i), data["Codeforces Handle"][i])
+        db.update(helper(r, i, data["Codeforces Handle"][i]), data["Codeforces Handle"][i])
         print (db.show(data["Codeforces Handle"][i]))
         # data['Questions_Solved'][i] = helper(r, i)
         # d = data.sort_values('Questions_Solved', ascending= False)
