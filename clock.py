@@ -15,7 +15,7 @@ data = pandas.read_csv("handles")
 # counting the number of Questions for a particular user
 def helper(r, i, handle):
     try:
-        count = 0
+        s = set()
         json_data = r. json()
         try:
             for j in range(len(json_data["result"])):
@@ -24,10 +24,12 @@ def helper(r, i, handle):
                         json_data["result"][j]["problem"]["rating"] >= max (data['ratings'][i], 1200) and
                         json_data["result"][j]["creationTimeSeconds"]>=TIME_STAMP and
                         json_data["result"][j]["author"]["ghost"]==False):
-                        count += 1
+                        s.add(str(json_data["result"][j]["problem"]["name"]))
                 except:
                     pass
+            count = len(list(s))
         except:
+            count = list(db.show(handle))[0][4]
             pass
     except:
         count = list(db.show(handle))[0][4]
