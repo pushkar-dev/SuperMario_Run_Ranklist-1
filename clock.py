@@ -14,15 +14,6 @@ data = pandas.read_csv("handles")
 
 # counting the number of Questions for a particular user
 def helper(r, i, handle):
-    temp = handle.split("/")[-1].split(" ")
-    if len(temp)>2:
-        handle = ""
-    else:
-        if len(temp[0]):
-            handle = temp[0]
-        else:
-            handle = temp[1]
-
     try:
         s = set()
         json_data = r. json()
@@ -49,7 +40,16 @@ def helper(r, i, handle):
 def update_sheet():
     print ("hello")
     for i in range(len(data["Name"])):
-        url = "https://codeforces.com/api/user.status?handle="+data["Codeforces Handle"][i]+"&from=1&count=100000"
+        temp = data["Codeforces Handle"][i].split("/")[-1].split(" ")
+        if len(temp)>2:
+            temp = ""
+        else:
+            if len(temp[0]):
+                temp = temp[0]
+            else:
+                temp = temp[1]
+
+        url = "https://codeforces.com/api/user.status?handle="+temp+"&from=1&count=100000"
         r = re.get(url, proxies=proxy)
         db.update(helper(r, i, data["Codeforces Handle"][i]), data["Codeforces Handle"][i])
         print(i)
