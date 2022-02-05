@@ -14,6 +14,13 @@ data = pandas.read_csv("handles")
 
 # counting the number of Questions for a particular user
 def helper(r, i, handle):
+    temp = handle
+    for x in temp.split("/")[-1].split(" "):
+        if len(x):
+            handle = x
+    if(handle == "ANYTHING"):
+        handle = ""
+
     try:
         s = set()
         json_data = r. json()
