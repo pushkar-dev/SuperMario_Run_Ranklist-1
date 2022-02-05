@@ -15,10 +15,13 @@ data = pandas.read_csv("handles")
 # counting the number of Questions for a particular user
 def helper(r, i, handle):
     temp = handle.split("/")[-1].split(" ")
-    if len(temp)>1:
+    if len(temp)>2:
         handle = ""
     else:
-        handle = temp[0]
+        if len(temp[0]):
+            handle = temp[0]
+        else:
+            handle = temp[1]
 
     try:
         s = set()
