@@ -25,6 +25,10 @@ class Database:
         entries = self.execute(f"SELECT * from data order by \"Questions_Solved\" DESC;") 
         return entries
 
+    def show_yearwise(self, year):
+        entries = self.execute(f"SELECT * from data where \"Year\" = {year} order by \"Questions_Solved\" DESC;") 
+        return entries
+
 
     def __del__(self):
         self.connection.close()
