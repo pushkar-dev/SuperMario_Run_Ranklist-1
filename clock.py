@@ -38,7 +38,7 @@ def helper(r, i, handle):
     return count
 
 #schedule 1
-@scheduler.scheduled_job('interval',minutes = 5)
+@scheduler.scheduled_job('interval',minutes = 1)
 def update_sheet():
     print ("hello")
     for i in range(len(data["Name"])):
@@ -51,7 +51,7 @@ def update_sheet():
             else:
                 temp = temp[1]
 
-        time.sleep(2)
+        time.sleep(1)
         url = "https://codeforces.com/api/user.status?handle="+temp+"&from=1&count=100000"
         r = re.get(url, proxies=proxy)
         x = helper(r, i, data["Codeforces Handle"][i])
