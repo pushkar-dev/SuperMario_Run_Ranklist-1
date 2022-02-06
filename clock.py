@@ -51,7 +51,10 @@ def update_sheet():
 
         url = "https://codeforces.com/api/user.status?handle="+temp+"&from=1&count=100000"
         r = re.get(url, proxies=proxy)
-        db.update(helper(r, i, data["Codeforces Handle"][i]), data["Codeforces Handle"][i])
-        print(i)
+        x = helper(r, i, data["Codeforces Handle"][i])
+        db.update(x, data["Codeforces Handle"][i])
+        print(data["Codeforces Handle"][i],"->",x)
+        if(r.json()["status"]!="OK"):
+            print(r.json())
 
 scheduler.start()
