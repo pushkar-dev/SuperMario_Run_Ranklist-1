@@ -36,7 +36,7 @@ def helper(r, i, handle):
     return count
 
 #schedule 1
-@scheduler.scheduled_job('interval',minutes = 1)
+@scheduler.scheduled_job('interval',minutes = 5)
 def update_sheet():
     print ("hello")
     for i in range(len(data["Name"])):
