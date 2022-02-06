@@ -1,7 +1,9 @@
+from datetime import time
 from apscheduler.schedulers.blocking import BlockingScheduler
 import pandas
 import requests as re
 from db_access import *
+import time
 
 scheduler = BlockingScheduler()
 TIME_STAMP = 1643913000 #unix time stamp for 4th feb 2022
@@ -49,6 +51,7 @@ def update_sheet():
             else:
                 temp = temp[1]
 
+        time.sleep(2)
         url = "https://codeforces.com/api/user.status?handle="+temp+"&from=1&count=100000"
         r = re.get(url, proxies=proxy)
         x = helper(r, i, data["Codeforces Handle"][i])
