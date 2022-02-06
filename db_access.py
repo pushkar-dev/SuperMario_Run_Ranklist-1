@@ -22,11 +22,11 @@ class Database:
         return entries
     
     def show_data(self):
-        entries = self.execute(f"SELECT * from data order by \"Questions_Solved\" DESC;") 
+        entries = self.execute(f"SELECT * from data order by \"Questions_Solved\" DESC, \"ratings\" DESC;") 
         return entries
 
     def show_yearwise(self, year):
-        entries = self.execute(f"SELECT * from data where \"Year\" = {year} order by \"Questions_Solved\" DESC;") 
+        entries = self.execute(f"SELECT * from data where \"Year\" = {year} order by \"Questions_Solved\" DESC, \"ratings\" DESC;") 
         return entries
 
 

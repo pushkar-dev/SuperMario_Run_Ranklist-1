@@ -40,9 +40,21 @@ def helper(r, i, handle):
 def update_sheet():
     print ("hello")
     for i in range(len(data["Name"])):
-        url = "https://codeforces.com/api/user.status?handle="+data["Codeforces Handle"][i]+"&from=1&count=100000"
+        temp = data["Codeforces Handle"][i].split("/")[-1].split(" ")
+        if len(temp)>2:
+            temp = ""
+        else:
+            if len(temp[0]):
+                temp = temp[0]
+            else:
+                temp = temp[1]
+
+        url = "https://codeforces.com/api/user.status?handle="+temp+"&from=1&count=100000"
         r = re.get(url, proxies=proxy)
-        db.update(helper(r, i, data["Codeforces Handle"][i]), data["Codeforces Handle"][i])
-        print(i)
+        x = helper(r, i, data["Codeforces Handle"][i])
+        db.update(x, data["Codeforces Handle"][i])
+        print(data["Codeforces Handle"][i],"->",x)
+        if(r.json()["status"]!="OK"):
+            print(r.json())
 
 scheduler.start()
