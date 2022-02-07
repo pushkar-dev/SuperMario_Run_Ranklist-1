@@ -14,10 +14,61 @@
       color: inherit;
  }
         </style>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <h1> Codeforces SuperMario Run Challenge RANKLIST </h1> 
     <h3> Questions solved is the count of questions, an individual has solved, having rating more than individual's rating </h3>
+    <h3>If you are not Registered, use below link to register.</h3>
+    
+    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Register</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="POST" action="/register" style="padding: 2em;">
+            <label data-error="wrong" data-success="right" for="text">Roll Number</label>
+            <input type="text" id="" name="Roll" class="form-control validate">
+
+            <label data-error="wrong" data-success="right" for="text">Name</label>
+            <input type="text" id="" name="Name" class="form-control validate">
+
+            <label data-error="wrong" data-success="right" for="text">Codeforces Handle</label>
+            <input type="text" id="" name="Handle" class="form-control validate">
+            
+            <label data-error="wrong" data-success="right" for="text">Year</label>
+            <select id="Year" name="Year" class="form-control validate">
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+            </select>
+
+
+            <div class="text-center" style="padding:2em;">
+            <button class="btn btn-submit" type="submit" value="submit" >Start Run</button>
+            </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Register</a>
+</div>
+
     <table style="width:100%">
         <tr>
             <th>S No.</th>

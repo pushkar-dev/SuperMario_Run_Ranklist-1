@@ -28,9 +28,10 @@ class Database:
     def show_yearwise(self, year):
         entries = self.execute(f"SELECT * from data where \"Year\" = {year} order by \"Questions_Solved\" DESC;") 
         return entries
-
+    
+    def add_u(self,roll,name,handle,yr):
+        return self.execute(f"INSERT INTO data VALUES ({name},{roll},{yr},{handle},0,0)") 
+        
 
     def __del__(self):
         self.connection.close()
-
-db = Database()
