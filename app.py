@@ -28,15 +28,31 @@ def load_users(batch):
         details = db.show_data()
     else :
         details = db.show_yearwise(batch)
+    k = 1
     for j in range(len(details)):
-        user = {}
-        user["s_no"] = j + 1
-        user["name"] = details[j][0]
-        user["roll_no"] = details[j][1]
-        user["codeforces_handle"] = details[j][3]
-        user["questions_solved"] = details[j][4]
-        user["rating"] = details[j][5]
-        user_details.append(user)
+        if (j > 0):
+            if (user_details[len(user_details) - 1]["codeforces_handle"] != details[j][3]):
+                user = {}
+                user["s_no"] = k
+                user["name"] = details[j][0]
+                user["roll_no"] = details[j][1]
+                user["codeforces_handle"] = details[j][3]
+                user["questions_solved"] = details[j][4]
+                user["rating"] = details[j][5]
+                user_details.append(user)
+                k = k + 1
+        else:
+            user = {}
+            user["s_no"] = k
+            user["name"] = details[j][0]
+            user["roll_no"] = details[j][1]
+            user["codeforces_handle"] = details[j][3]
+            user["questions_solved"] = details[j][4]
+            user["rating"] = details[j][5]
+            user_details.append(user)
+            k = k + 1
+
+
     return user_details
 
 @app.route('/', methods=['POST','GET'])
