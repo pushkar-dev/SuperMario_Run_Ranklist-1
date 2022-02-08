@@ -29,8 +29,9 @@ class Database:
         entries = self.execute(f"SELECT * from data where \"Year\" = {year} order by \"Questions_Solved\" DESC, \"ratings\" DESC;") 
         return entries
     
-    def add_u(self,roll,name,handle,yr):
-        self.cursor.execute(f"INSERT INTO data VALUES ('{name}','{roll}','{yr}','{handle}',0,0)") 
+    def add_u(self,roll,name,handle,yr, rating):
+        self.cursor.execute(f"INSERT INTO data VALUES ('{name}','{roll}','{yr}','{handle}', 0, {rating})") 
+        self.connection.commit()
         
 
     def __del__(self):

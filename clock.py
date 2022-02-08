@@ -3,6 +3,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 import pandas
 import requests as re
 from db_access import Database
+import time
 
 db=Database()
 
@@ -40,9 +41,9 @@ def helper(r, i, handle):
     return count
 
 #schedule 1
-@scheduler.scheduled_job('interval',minutes=30)
+@scheduler.scheduled_job('interval',minutes = 6)
 def update_sheet():
-    print ("hello")
+    print ("Start")
     for i in range(len(data["Name"])):
         temp = data["Codeforces Handle"][i].split("/")[-1].split(" ")
         if len(temp)>2:
@@ -52,12 +53,12 @@ def update_sheet():
                 temp = temp[0]
             else:
                 temp = temp[1]
-
+        time.sleep(1)
         url = "https://codeforces.com/api/user.status?handle="+temp+"&from=1&count=100000"
         r = re.get(url, proxies=proxy)
         x = helper(r, i, data["Codeforces Handle"][i])
         db.update(x, data["Codeforces Handle"][i])
-        print(data["Codeforces Handle"][i],"->",x)
+        print(i, data["Codeforces Handle"][i],"->",x)
         if(r.json()["status"]!="OK"):
             print(r.json())
 
