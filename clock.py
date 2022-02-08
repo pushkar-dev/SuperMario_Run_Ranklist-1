@@ -1,7 +1,9 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 import pandas
 import requests as re
-from db_access import *
+from db_access import Database
+
+db=Database()
 
 scheduler = BlockingScheduler()
 TIME_STAMP = 1643913000 #unix time stamp for 4th feb 2022
@@ -9,9 +11,10 @@ proxy = {
 'http' : '',
 'https' : ''
 }
+cols=["Name","Roll No.","Year","Codeforces Handle","Questions_Solved","ratings"]
 # reading the existing data
-data = pandas.read_csv("handles")
-
+data = pandas.DataFrame(db.show_data(),columns=cols)
+print(data)
 # counting the number of Questions for a particular user
 def helper(r, i, handle):
     try:
@@ -36,7 +39,7 @@ def helper(r, i, handle):
     return count
 
 #schedule 1
-@scheduler.scheduled_job('interval',minutes = 1)
+@scheduler.scheduled_job('interval',minutes=30)
 def update_sheet():
     print ("hello")
     for i in range(len(data["Name"])):
@@ -58,3 +61,6 @@ def update_sheet():
             print(r.json())
 
 scheduler.start()
+
+#if __name__=='__main__':
+#    update_sheet()
