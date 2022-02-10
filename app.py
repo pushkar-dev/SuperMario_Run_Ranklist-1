@@ -4,6 +4,7 @@ import re
 import requests
 
 MAINTAINANCE=False
+TIME_STAMP = 1643913000
 db=Database()
 
 proxy = {
@@ -95,6 +96,41 @@ def register():
     else:
         return redirect('/') 
             
+@app.route('/<user>')
+def user_details(user):
+    url = "https://codeforces.com/api/user.status?handle="+user+"&from=1&count=100000"
+    r = requests.get(url, proxies=proxy)
+    json_data = r. json()
+    user_questions = []
+    try:
+        k = 1
+        for j in range(len(json_data["result"])):
+            try:
+
+                rating_user = list(db.show(user)[0])[5]
+                if (json_data["result"][j]["verdict"] == "OK" and 
+                    json_data["result"][j]["problem"]["rating"] >= max (rating_user, 1200) and
+                    json_data["result"][j]["creationTimeSeconds"]>=TIME_STAMP and
+                    json_data["result"][j]["author"]["ghost"]==False):
+                    que = {}
+                    que["s_no"] = k
+                    que["contest"] = json_data["result"][j]["problem"]["contestId"]
+                    que["index"] = json_data["result"][j]["problem"]["index"]
+                    que["submission"] = json_data["result"][j]["id"]
+                    que["rating"] = json_data["result"][j]["problem"]["rating"]
+                    que["name"] = json_data["result"][j]["problem"]["name"]
+                    k += 1
+                    user_questions.append(que)
+                    render_template('user_questions.html', lists = user_questions)
+                if (json_data["result"][j]["creationTimeSeconds"] < TIME_STAMP):
+                    print("hello")
+                    break
+            except:
+                pass
+    except:
+        pass
+    print(user_questions)
+    return render_template('user_questions.html', lists = user_questions)
 
 
 if __name__ == '__main__':
