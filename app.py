@@ -123,13 +123,11 @@ def user_details(user):
                     user_questions.append(que)
                     render_template('user_questions.html', lists = user_questions)
                 if (json_data["result"][j]["creationTimeSeconds"] < TIME_STAMP):
-                    print("hello")
                     break
             except:
                 pass
     except:
         pass
-    print(user_questions)
     return render_template('user_questions.html', lists = user_questions)
 
 

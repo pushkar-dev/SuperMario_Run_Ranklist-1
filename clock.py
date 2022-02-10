@@ -16,7 +16,7 @@ proxy = {
 cols=["Name","Roll No.","Year","Codeforces Handle","Questions_Solved","ratings"]
 # reading the existing data
 data = pandas.DataFrame(db.show_data(),columns=cols)
-print(data)
+# print(data)
 # counting the number of Questions for a particular user
 def helper(r, i, handle):
     try:
