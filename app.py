@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template, request
 from db_access import Database
 import re
 import requests
+from datetime import datetime
 
 MAINTAINANCE=False
 TIME_STAMP = 1643913000
@@ -119,6 +120,7 @@ def user_details(user):
                     que["submission"] = json_data["result"][j]["id"]
                     que["rating"] = json_data["result"][j]["problem"]["rating"]
                     que["name"] = json_data["result"][j]["problem"]["name"]
+                    que["time"] = str(datetime.utcfromtimestamp(json_data["result"][j]["creationTimeSeconds"]).strftime('%Y-%m-%d %H:%M:%S'))
                     k += 1
                     user_questions.append(que)
                     render_template('user_questions.html', lists = user_questions)

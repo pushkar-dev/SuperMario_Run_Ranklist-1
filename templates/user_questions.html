@@ -29,6 +29,7 @@
             <th>S No.</th>
             <th>Problem</th>
             <th>Submission</th>
+            <th>Submission time </th>
             <th>Rating</th>
         </tr>
         {% for i in lists %}
@@ -36,6 +37,7 @@
                 <td>{{ i.s_no }}</td>
                 <td> <a href = "https://codeforces.com/contest/{{i.contest}}/problem/{{i.index}}" target = "_blank">{{ i.name }}<a></td>
                 <td> <a href = "https://codeforces.com/contest/{{i.contest}}/submission/{{i.submission}}" target = "_blank">User Solution<a></td>
+                <td> {{i.time}} </td>
                 <td>{{ i.rating }}</td>
         {% endfor %}
     </table>
