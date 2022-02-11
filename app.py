@@ -128,7 +128,7 @@ def user_details(user):
                 pass
     except:
         pass
-    return render_template('user_questions.html', lists = user_questions)
+    return render_template('user_questions.html', lists = user_questions, user = user)
 
 
 if __name__ == '__main__':
