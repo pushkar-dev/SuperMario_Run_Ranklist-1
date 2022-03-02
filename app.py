@@ -6,6 +6,7 @@ from datetime import datetime
 
 MAINTAINANCE=False
 TIME_STAMP = 1643913000
+END_TIME = 1645813800
 db=Database()
 
 proxy = {
@@ -112,6 +113,7 @@ def user_details(user):
                 if (json_data["result"][j]["verdict"] == "OK" and 
                     json_data["result"][j]["problem"]["rating"] >= max (rating_user, 1200) and
                     json_data["result"][j]["creationTimeSeconds"]>=TIME_STAMP and
+                    json_data["result"][j]["creationTimeSeconds"] <= END_TIME and
                     json_data["result"][j]["author"]["ghost"]==False):
                     que = {}
                     que["s_no"] = k

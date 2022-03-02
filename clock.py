@@ -9,6 +9,7 @@ db=Database()
 
 scheduler = BlockingScheduler()
 TIME_STAMP = 1643913000 #unix time stamp for 4th feb 2022
+END_TIME = 1645813800
 proxy = {
 'http' : '',
 'https' : ''
@@ -28,6 +29,7 @@ def helper(r, i, handle):
                     if (json_data["result"][j]["verdict"] == "OK" and 
                         json_data["result"][j]["problem"]["rating"] >= max (data['ratings'][i], 1200) and
                         json_data["result"][j]["creationTimeSeconds"]>=TIME_STAMP and
+                        json_data["result"][j]["creationTimeSeconds"] <= END_TIME and
                         json_data["result"][j]["author"]["ghost"]==False):
                         s.add(str(json_data["result"][j]["problem"]["name"]))
                 except:
