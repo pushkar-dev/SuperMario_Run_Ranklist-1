@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user}}</title>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+        a, a:hover, a:focus, a:active {
+      text-decoration: none;
+      color: inherit;
+ }
+        </style>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <table style="width:100%">
+        <tr>
+            <th>S No.</th>
+            <th>Problem</th>
+            <th>Submission</th>
+            <th>Submission time </th>
+            <th>Rating</th>
+        </tr>
+        {% for i in lists %}
+            <tr>
+                <td>{{ i.s_no }}</td>
+                <td> <a href = "https://codeforces.com/contest/{{i.contest}}/problem/{{i.index}}" target = "_blank">{{ i.name }}<a></td>
+                <td> <a href = "https://codeforces.com/contest/{{i.contest}}/submission/{{i.submission}}" target = "_blank">User Solution<a></td>
+                <td> {{i.time}} </td>
+                <td>{{ i.rating }}</td>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

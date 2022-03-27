@@ -25,8 +25,7 @@
 </head>
 <body>
     <h1> Codeforces SuperMario Run Challenge RANKLIST </h1> 
-    <h3> Questions solved is the count of questions, an individual has solved, having rating more than individual's rating </h3>
-    <h3>If you are not Registered, use below link to register.</h3>
+    <!-- <h3> Questions solved is the count of questions, an individual has solved, having rating more than individual's rating </h3> -->
     
     <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
@@ -64,9 +63,19 @@
     </div>
   </div>
 </div>
-
-<div class="text-center">
-  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Register</a>
+<div>
+<h4>If Your name is not visible in ranklist <a href="" data-toggle="modal" data-target="#modalLoginForm">Register Here</a></h4>
+<form action='/' method="POST">
+  <label>Check Yearwise Ranklist</label>
+  <select name='year' onchange='if(this.value != 0) { this.form.submit(); }' >
+      <option value=2000>--Select One--</option>
+       <option value=2018>2018</option>
+       <option value=2019>2019</option>
+       <option value=2020>2020</option>
+       <option value=2021>2021</option>
+       <option value=2000>all</option>
+  </select>
+</form>
 </div>
 
     <table style="width:100%">
@@ -83,7 +92,8 @@
                 <td>{{ i.s_no }}</td>
                 <td>{{ i.name }}</td>
                 <td>{{ i.roll_no }}</td>
-                <td> <a href = "https://codeforces.com/profile/{{ i.codeforces_handle }}" target = "_blank">{{ i.codeforces_handle }}<a></td>
+                <!-- <td> <a href = "https://codeforces.com/profile/{{ i.codeforces_handle }}" target = "_blank">{{ i.codeforces_handle }}<a></td> -->
+                <td> <a href = "/{{ i.codeforces_handle }}" target = "_blank">{{ i.codeforces_handle }}<a></td>
                 <td>{{ i.rating }}</td>
                 <td>{{ i.questions_solved }}</td>
         {% endfor %}
